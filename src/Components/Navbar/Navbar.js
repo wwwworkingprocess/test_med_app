@@ -1,3 +1,4 @@
+import { NavLink, useNavigate } from "react-router-dom";
 import "./Navbar.css"
 
 function BrandIcon() {
@@ -11,7 +12,8 @@ function BrandIcon() {
 }
 
 export default function Navbar()  {
-    const handleClick = ()=>{
+  const navigate = useNavigate();
+  const handleClick = ()=>{
         const toggleBtn = document.querySelector(".nav__toggle");
     const links = document.querySelector(".nav__links");
     const actions = document.querySelector(".nav__actions");
@@ -24,28 +26,37 @@ export default function Navbar()  {
         icon.classList.toggle("fa-times", isOpen);
     }
 
+    const isLoggedIn = sessionStorage.getItem('auth-token');
+    const onLogout = ()=>{
+        sessionStorage.clear();
+        navigate("/");
+
+    }
 
 
     return <nav className="nav" aria-label="Primary navigation">
-    <a className="nav__brand" href="./Landing_Page/LandingPage.html" aria-label="StayHealthy Home">
+    <NavLink className="nav__brand" to="/" aria-label="StayHealthy Home">
       <span className="nav__brandIcon" aria-hidden="true">
         <BrandIcon />
       </span>
       <span className="nav__brandText">StayHealthy</span>
-    </a>
+    </NavLink>
 
     <button className="nav__toggle" type="button" aria-label="Toggle menu" aria-expanded="false" onClick={handleClick}>
       <i className="fa fa-bars" aria-hidden="true"></i>
     </button>
 
     <ul className="nav__links" id="primaryNav">
-      <li className="nav__item"><a className="nav__link" href="#">Home</a></li>
-      <li className="nav__item"><a className="nav__link" href="#">Appointments</a></li>
+        <li className="nav__item"><NavLink className="nav__link" to={"/"}>Home</NavLink></li>
+        <li className="nav__item"><NavLink className="nav__link" to={"/"}>Appointments</NavLink></li>
+        
     </ul>
 
     <div className="nav__actions">
-      <a className="btn btn--outline" href="./Sign_Up/Sign_Up.html">Sign Up</a>
-      <a className="btn btn--primary" href="./Login/Login.html">Login</a>
+      {isLoggedIn ? <span style={{minWidth:'140px'}}>Welcome {sessionStorage.getItem('name')}</span>:null}
+      <NavLink className="btn btn--outline" to={"/sign-up"}>Sign up</NavLink>
+      {!isLoggedIn ? <NavLink className="btn btn--primary" to={"/login"}>Login</NavLink> :
+      <button className="btn btn--primary" onClick={onLogout}>Log out</button>}
     </div>
   </nav>
 }

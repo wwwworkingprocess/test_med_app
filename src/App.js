@@ -8,7 +8,10 @@ import Landing_Page from "./Components/Landing_Page/Landing_Page";
 
 // Import custom Navbar component
 import Navbar from './Components/Navbar/Navbar';
+import Login from './Components/Login/Login';
+import Sign_Up from './Components/Sign_Up/Sign_Up';
 
+import "./App.css";
 // Function component for the main App
 function App() {
 
@@ -21,10 +24,16 @@ function App() {
           <Navbar/>
 
           {/* Set up the Routes for different pages */}
+          <div className="page">
           <Routes>
             <Route path="/" element={<Landing_Page/>}/>
+            <Route path="/login" element={<Login/>}/>
+            <Route path="/sign-up" element={<Sign_Up/>}/>
+            
             {/* Define individual Route components for different pages */}
           </Routes>
+          </div>
+          
         </BrowserRouter>
     </div>
   );
