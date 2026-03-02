@@ -49,10 +49,10 @@ const Login = () =>{
       // Handle errors if authentication fails
       if (json.errors) {
         for (const error of json.errors) {
-          alert(error.msg);
+            setError(error.msg);
         }
       } else {
-        alert(json.error);
+        setError(json.error);
       }
     }
   };

@@ -11,6 +11,8 @@ import Navbar from './Components/Navbar/Navbar';
 import Login from './Components/Login/Login';
 import Sign_Up from './Components/Sign_Up/Sign_Up';
 
+import InstantConsultation from './Components/InstantConsultation/InstantConsultation';  
+
 import "./App.css";
 // Function component for the main App
 function App() {
@@ -29,6 +31,7 @@ function App() {
             <Route path="/" element={<Landing_Page/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/sign-up" element={<Sign_Up/>}/>
+            <Route path="/instant-consultation" element={<InstantConsultation />} />
             
             {/* Define individual Route components for different pages */}
           </Routes>
